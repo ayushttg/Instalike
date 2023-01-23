@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <style>
+      textarea:focus{
+        outline: none;
+       
+      }
+      textarea{
+        resize: none;
+        background-color:  whitesmoke;
+      }
+
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"  href="/css/profilenew.css">
+    <link href="https://fonts.googleapis.com/css?family=Gotu&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aladin&family=Leckerli+One&family=Pacifico&family=Satisfy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans|Quicksand:500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Leckerli+One&family=Pacifico&family=Satisfy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Satisfy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+  </head>
+  <title>Welcome | <%= loggedUser %></title>
+  <body>
+    <div class="topnav">
+        <div class="row">
+          <div class="col-lg-3">
+          <a href="/profile"><img src="https://fontmeme.com/permalink/200726/f50048c1992eb81b297e1dd908c54d94.png" style="height: 70%; width: 40%; margin-left: 20%; margin-top: 2%;" > </a> 
+          </div>
+          <div class="col-lg-3 search">
+           <form method="GET" action="/search">
+             <input type="text"  class="form-control" placeholder="Search someone..." name="query" required autocomplete="off" >
+           </form>
+       
+          </div>
+          <div class="col-1">
+
+          </div>
+          <div class="col-lg-5" >
+            <span class="s1" style="margin-left: 95px;">
+            <a href="/profile"><img src="https://static.thenounproject.com/png/682477-200.png" style="height: 30px; width: 30px; margin-top: 10px; margin-left: 30px;"></a>  
+            </span>
+            <span class="s2">
+             <a href="/suggestions"> <img src="https://cdn0.iconfinder.com/data/icons/instagram-ui-1/24/Instagram-UI_discover_people-512.png" style="height: 35px; width: 35px; margin-top: 10px; margin-left: 30px;"></a>
+            </span>
+            <span class="s3">
+              <a href="/requests"> <img src="https://cdn0.iconfinder.com/data/icons/instagram-ui-1/24/Instagram-UI_like-512.png" style="height: 35px; width: 35px; margin-top: 10px; margin-left: 30px;"></a> 
+            </span>
+            <span class="s4">
+            <a href="/viewprofile/<%=loggedUser %>"><img src="<%= simage.profileimg %>" style="height: 30px; width: 30px; margin-top: 10px; margin-left: 30px; border-radius: 20px;"></a>  
+            </span>
+            <span class="s5">
+             <a href="/logout"> <img src="https://static.thenounproject.com/png/205237-200.png" style="height: 35px; width: 35px; margin-top: 10px; margin-left: 30px;"> </a>
+            </span>
+         </div>
+
+      
+      
+        </div>
+      </div>
+   <div class="container">
+     <div class="row postform" style="margin-top: 30px;" >
+       <div class="col-lg-3">
+
+       </div>
+       <div class="postnew col-lg-6">
+         <!-- <div id="hii" style="width: 100; background-color: whitesmoke; height: 250px; margin-bottom: 10px; border: 1px solid lightgray; background: 
+         url('https://www.kindpng.com/picc/m/151-1513748_arrow-png-no-background-drawn-arrow-transparent-background.png'); background-position: center; background-size:50%; background-repeat: no-repeat;">
+
+         </div> -->
+         
+         <img id="output"/>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <form action="/newposttemp" method="POST" enctype="multipart/form-data">
+          <input type="file" accept="image/*"  class="form-control cols1" id="exampleInputEmail1" placeholder="Image Link" name="image" autocomplete="off" onchange="loadFile(event)">
+
+          <textarea rows = "3" cols = "71" name = "caption" placeholder=" What's on your mind?"  maxlength="5000" style="border: none; border-bottom: 2px solid lightgrey; resize: none; background-color:  whitesmoke;"></textarea>
+    
+         <div class="butto" ><button class="btn  btn-primary logbutt" style="width: 40%; display: block; margin: auto;">POST</button></div> 
+       </form>
+       </div>
+       <div class="col-lg-3">
+
+       </div>
+     </div>
+
+    <div class="row">
+     <% if(results.length===0){ %>
+      <div class="col-2">
+
+      </div>
+      <div class="col-8">
+        <h1 class="display-4" style="font-size: 50px; text-align: center; color: darkslategray; margin-top: 40px;">Search and follow <br> to get content.</h1>
+      </div>
+      <div class="col-2">
+
+      </div>
+      <div class="col-5">
+
+      </div>
+      <div class="col-2" style="margin-top: 20px;">
+      <a href="/suggestions"><button class="btn btn-lg btn-light" style="border: 1px solid gray;">Suggestions</button></a>  
+      </div>
+      <div class="col-5">
+
+      </div>
+      <div class="col-2">
+
+      </div>
+ 
+    <%  } %>
+      <% for(var i=0;i!=results.length;i++){ %>
+        <% var commentsBlog=[] %>
+        <% var bid= results[i]._id.toString() %>
+
+       <% for(var j=0;j!=comments.length;j++){ %>
+         <% if(comments[j].blogid==bid){ %>
+          <%  commentsBlog.push(comments[j]) %>
+        <%  } %>  
+      <%  }  %>
+        <div class="col-12 spacing">
+          
+        </div>
+        <div class="col-2">
+
+        </div>
+        <div class="col-8 data">
+          <div class="row username">
+            <div class="col-1">
+             <% var temp; %>
+            <% for(var j=0;j!=images.length;j++) { %>
+             <% if(images[j].username===results[i].createdby){ %>
+              <%  temp=images[j].profileimg;break; %>
+            <%  } %>
+            <% } %>
+            <a href="/viewprofile/<%= results[i].createdby %>">  <img src=<%= temp %> alt=""> </a>
+            </div>
+           
+            <div class="col-9">
+              <p class="cby"><%= results[i].createdby %></p>
+            </div>
+            <div class="col-1">
+             <% if(results[i].createdby===loggedUser) { %>
+              <a href="/deleteblog/<%= results[i]._id %>"> <button class="btn btn-md btn-light" style="border: 1px solid lightgray; margin-top: 15px;" >Delete</button> </a>
+              <% } %>
+            </div>
+            <div class="col-1">
+              
+            </div>
+            </div>
+    
+          <div class="image row">
+              <img src="<%= results[i].image %>" alt="" class="postimg ">
+          </div>
+          <div class="likes">
+            <div class="row">
+              <div class="col-1">
+                <% var liked=false; %>
+                <% for(var j=0;j!=results[i].likedby.length;j++) { %>
+                  <% if(results[i].likedby[j]==loggedUser) { %>
+                    <% liked=true; break; %>
+                 <% } %>
+                <% } %>
+               <% if(liked) { %>
+                <a href="/unlike/<%=results[i]._id%>"><img src="https://www.searchpng.com/wp-content/uploads/2019/02/Instagram-Like-Icon-715x715.png" alt="" style="height: 40px; width: 40px;"> </a>
+               <% } %>
+               <% if(liked==false){ %>
+                <a href="/like/<%=results[i]._id%>"> <img src="https://cdn0.iconfinder.com/data/icons/instagram-ui-1/24/Instagram-UI_like-512.png" alt="" style="height: 40px; width: 40px;"></a>
+                <% } %>
+              </div>
+              <div class="col-4">
+                <p><%= results[i].likedby.length %> likes</p>
+              </div>
+              <div class="col-3">
+             
+              </div>
+              <!-- <div class="col-1" >
+                <img src="https://cdn3.iconfinder.com/data/icons/faticons/32/view-01-512.png" alt="" style="height: 45px; width: 45px;" class="commentsection"> 
+              </div>
+              <div class="col-3">
+                <p> <%= commentsBlog.length %> comments</p>
+              </div> -->
+            </div>
+        
+          </div>
+          <div class="row captions">
+            <p style="font-family: 'Nunito', sans-serif;"><%= results[i].caption %></p>  
+           
+          </div>
+          <div class="row captions"> 
+            <div class="col-12">
+              <form action="/addcomment/<%= results[i]._id %>" method="POST">
+                <input type="text" name="comment" placeholder="Add a comment...(120 chars)" style="width: 100%;" maxlength="120" autocomplete="off">  
+              </form>
+            </div>
+         
+          </div>
+          <div class="row captions" style="height: 10px;"> 
+      
+         
+          </div>
+            <% commentsBlog=commentsBlog.reverse() %>
+       
+          <div class="tohidew" >
+            <div class="row" >  
+              <% for(var j=0;j!=commentsBlog.length;j++){ %>
+               <br>
+               <div class="col-1">
+                  <% var userimg; %>
+                  <% var cuser; %>
+                  <% for(var k=0;k!=images.length;k++){ %>
+                   <%   if(images[k].username==commentsBlog[j].commentedBy){ %>
+                    <%   userimg=images[k].profileimg; cuser=images[k].username;break; %>
+                   <%  } %>
+                  <% } %>
+                
+                <a href="/viewprofile/<%= cuser %>"><img src="<%= userimg %>" alt="" class="commentUser cclass" > </a> 
+         
+               </div>
+               <div class="col-9">
+                 <p class="usernamecomment cclass" style="margin-left: 0;  font-size: 20px;" ><%= cuser %></p>
+               </div>
+               <div class="col-2">
+                <% if(commentsBlog[j].commentedBy===loggedUser){ %>
+                    <a href="/deleteComment/<%= commentsBlog[j]._id %>"><button class="btn btn-sm btn-light" style="border: 1px solid lightgray; margin-top: 5px;" >Delete</button> </a>
+                <% } %>
+               </div>
+               <div class="col-1">
+
+               </div>
+               <div class="col-11">
+                 <p class="comment cclass" style="color: darkslategrey;"><%= commentsBlog[j].comment %></p>
+               </div>
+               <br>
+               
+              <% } %>
+             </div>
+           
+          </div>
+          
+          <div class="likeshere">
+            <div class="row">
+           <%   for(var k=0;k!=results[i].likedby.length;k++){ %>
+            <div class="col-3">
+              <p>👍 <%= results[i].likedby[k] %></p>
+            </div>
+              
+           <%   } %>
+            </div>
+          </div>
+
+
+        </div>
+        <div class=col-2>
+
+        </div>
+     
+     <% } %>
+
+   </div>
+ 
+   </div>
+   <script>
+    var loadFile = function(event) {
+      var output = document.getElementById('output');
+      output.style.height="250px";
+      output.style.width="80%";
+      output.style.display="block";
+      output.style.margin="auto";
+      output.src = URL.createObjectURL(event.target.files[0]);
+      output.onload = function() {
+        URL.revokeObjectURL(output.src) // free memory
+      }
+    };
+  </script>
+    <script src="/js/profile.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>s
